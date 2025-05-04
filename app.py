@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 app = Flask(__name__)
 app.secret_key = 'secretkey123'  # Replace with a secure key in production
 
 # Connect to SQLite
+
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -90,6 +92,7 @@ def comment():
     conn.close()
     return redirect('/')
 
+
 @app.route('/realms')
 def realms():
     return render_template('realms.html')
@@ -98,6 +101,11 @@ def realms():
 @app.route('/codex')
 def codex():
     return render_template('codex.html')
+
+
+@app.route('/tavern')
+def tavern():
+    return render_template('tavern.html')
 
 
 if __name__ == '__main__':

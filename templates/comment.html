@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Comment on {{ topic }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <h1>Comments on {{ topic }}</h1>
+
+  <form method="POST">
+    <textarea name="content" rows="4" cols="50" required></textarea><br>
+    <button type="submit">Post Comment</button>
+  </form>
+
+  <h2>Previous Comments</h2>
+  <ul>
+    {% for comment in comments %}
+    <li><strong>{{ comment.user }}:</strong> {{ comment.content }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="/">Return to Home</a>
+</body>
+
+</html>

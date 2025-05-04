@@ -1,10 +1,12 @@
+/* === Global Body === */
 body {
     margin: 0;
     font-family: 'Georgia', serif;
     background-color: #0c0f0a;
-    color: #c1f0c1;
+    color: #aef7ae; /* Soft arcane green text */
   }
   
+  /* === Header Section === */
   header {
     background-color: #111;
     padding: 20px;
@@ -13,12 +15,14 @@ body {
     align-items: center;
   }
   
+  /* Logo Title */
   .logo {
     font-size: 24px;
     font-weight: bold;
     color: #59f159;
   }
   
+  /* Navigation Links */
   nav a {
     color: #aef7ae;
     margin-left: 20px;
@@ -30,16 +34,25 @@ body {
     color: #59f159;
   }
   
+  /* === Hero Section === */
   main {
     text-align: center;
     padding: 80px 20px;
   }
   
-  h1 {
+  .hero h2 {
     font-size: 3em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: #b8ffb8;
+    text-shadow: 0 0 5px #59f159;
   }
   
+  .hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  
+  /* === Glowing Button === */
   .btn {
     padding: 15px 30px;
     background-color: #59f159;
@@ -48,12 +61,42 @@ body {
     font-weight: bold;
     border-radius: 10px;
     transition: background-color 0.3s;
+    box-shadow: 0 0 10px #59f159;
   }
   
   .btn:hover {
     background-color: #7aff7a;
   }
   
+  /* === Cards Section === */
+  .card-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  
+  .card {
+    background-color: #131a13;
+    border: 1px solid #59f159;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 0 15px rgba(89, 241, 89, 0.3);
+  }
+  
+  .card h3 {
+    color: #b8ffb8;
+    text-shadow: 0 0 4px #59f159;
+  }
+  
+  .card p {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+  }
+  
+  /* === Footer === */
   footer {
     text-align: center;
     padding: 20px;

@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ArcanaGate</title>
-
-    <!-- Link to external CSS file -->
+    <!-- Link to custom fantasy CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <!-- Header with logo and navigation -->
+    <!-- === Header: Logo and Navigation === -->
     <header>
-        <div class="logo">ArcanaGate</div>
+        <h1 class="logo">ArcanaGate</h1>
         <nav>
             <a href="/">Home</a>
             <a href="/realms">Realms</a>
             <a href="/codex">Codex</a>
             <a href="/tavern">Tavern</a>
-
-            <!-- Show Login/Register or Logout depending on session -->
             {% if session.get('username') %}
             <a href="/logout">Logout</a>
             {% else %}
@@ -31,38 +26,42 @@
         </nav>
     </header>
 
-    <!-- Main content area -->
+    <!-- === Hero Section: Intro and CTA === -->
     <main>
-        <h1>Enter the ArcanaGate</h1>
+        <div class="hero">
+            <h2>Enter the ArcanaGate</h2>
+            <p>A gateway to forgotten realms, forbidden knowledge, and whispered secrets.</p>
+            <a href="/register" class="btn">Begin Your Journey</a>
+        </div>
 
-        <!-- Welcome message or call to action based on login -->
-        {% if session.get('username') %}
-        <p>Welcome, <strong>{{ session['username'] }}</strong>! Your journey begins.</p>
-        {% else %}
-        <p><a class="btn" href="/register">Begin Your Journey</a></p>
-        {% endif %}
-        {% if session.get('username') %}
-        <form method="POST" action="/comment">
-            <textarea name="content" rows="4" cols="50" placeholder="Share your thoughts..." required></textarea><br>
-            <button type="submit">Post Comment</button>
-        </form>
-        {% else %}
-        <p><a href="/login">Log in</a> to post a comment.</p>
-        {% endif %}
+        <!-- === Card Section: Game Areas with Comment Buttons === -->
+        <div class="card-section">
 
-        <hr>
+            <!-- Ancient Ruins -->
+            <div class="card">
+                <h3>Ancient Ruins</h3>
+                <p>A fascinating game.</p>
+                <a href="/comment?topic=Ancient Ruins" class="btn">Comment</a>
+            </div>
 
-        <h2>Latest Comments</h2>
-        {% for comment in comments %}
-        <p><strong>{{ comment['user'] }}</strong> ({{ comment['created_at'] }}):<br>
-            {{ comment['content'] }}</p>
-        {% else %}
-        <p>No comments yet.</p>
-        {% endfor %}
+            <!-- Shadows Descent -->
+            <div class="card">
+                <h3>Shadows Descent</h3>
+                <p>A primating a ratage.</p>
+                <a href="/comment?topic=Shadows Descent" class="btn">Comment</a>
+            </div>
 
+            <!-- Mystic Quest -->
+            <div class="card">
+                <h3>Mystic Quest</h3>
+                <p>A mexinisiic explore.</p>
+                <a href="/comment?topic=Mystic Quest" class="btn">Comment</a>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Footer -->
+    <!-- === Footer === -->
     <footer>
         <p>&copy; 2025 ArcanaGate. All rights reserved.</p>
     </footer>

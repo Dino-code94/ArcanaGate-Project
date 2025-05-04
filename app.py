@@ -75,22 +75,34 @@ def logout():
     return redirect('/')
 
 
-@app.route('/comment', methods=['POST'])
+@app.route('/comment', methods=['GET', 'POST'])
 def comment():
-    if 'username' not in session:
-        return redirect('/login')
+    topic = request.args.get('topic', 'Unknown Topic')
 
-    content = request.form['content']
-    user = session['username']
+    if request.method == 'POST':
+        if 'username' not in session:
+            return redirect('/login')
+        content = request.form['content']
+        user = session['username']
 
+        conn = get_db_connection()
+        conn.execute(
+            'INSERT INTO comments (user, content, topic) VALUES (?, ?, ?)',
+            (user, content, topic)
+        )
+        conn.commit()
+        conn.close()
+        return redirect('/comment?topic=' + topic)
+
+    # GET request: show the form + previous comments
     conn = get_db_connection()
-    conn.execute(
-        'INSERT INTO comments (user, content) VALUES (?, ?)',
-        (user, content)
-    )
-    conn.commit()
+    comments = conn.execute(
+        'SELECT user, content, created_at FROM comments WHERE topic = ? ORDER BY created_at DESC',
+        (topic,)
+    ).fetchall()
     conn.close()
-    return redirect('/')
+    return render_template('comment.html', topic=topic, comments=comments)
+
 
 
 @app.route('/realms')

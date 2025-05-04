@@ -170,4 +170,49 @@ body {
     color: #c1f0c1;
     font-size: 0.95em;
   }
+
+  /* === Codex Image Styling === */
+.codex-image {
+    display: block;
+    max-width: 80%;
+    height: auto;
+    margin: 20px auto;
+    border: 2px solid #59f159;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(89, 241, 89, 0.3);
+  }
+
+  /* === Tavern Page Styling === */
+.tavern-image {
+    display: block;
+    max-width: 80%;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(89, 241, 89, 0.2);
+    border: 2px solid #59f159;
+  }
+  
+  .tavern-whispers {
+    margin: 30px auto;
+    max-width: 700px;
+    list-style: none;
+    padding: 0;
+    color: #c1f0c1;
+  }
+  
+  .tavern-whispers li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .tavern-whispers li::before {
+    content: "☾";
+    position: absolute;
+    left: 0;
+    color: #59f159;
+  }
+  
+  
   

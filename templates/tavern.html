@@ -1,22 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Tavern - ArcanaGate</title>
+    <meta charset="UTF-8" />
+    <title>The Whispering Tavern</title>
+
+    <!-- Main site styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-  <h1>The Whispering Tavern</h1>
 
-  <img src="{{ url_for('static', filename='images/tavern_interior.jpg') }}" alt="Tavern Interior" style="width:100%; max-width:800px; margin-bottom:20px;">
+    <!-- === Site Header with Navigation === -->
+    <header>
+        <h1 class="logo">ArcanaGate</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/realms">Realms</a>
+            <a href="/codex">Codex</a>
+            <a href="/tavern">Tavern</a>
+            {% if session.get('username') %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            {% endif %}
+        </nav>
+    </header>
 
-  <p>Adventurers gather here to share drinks, secrets, and stories...</p>
+    <!-- === Main Tavern Section === -->
+    <main>
+        <!-- Page Title and Intro -->
+        <h2 class="section-title">The Whispering Tavern</h2>
+        <p class="intro-text">
+            Where adventurers gather, rumors are born, and destinies are rewritten over a drink.
+        </p>
 
-  <ul>
-    <li>“I saw a phoenix descend into the Hollow Marsh last night.”</li>
-    <li>“The mines at Frostdeep reopened. Dangerous, but rich.”</li>
-    <li>“A rogue mage seeks the Vault of Stars — foolish quest.”</li>
-    <li>“The green ale still glows. That can’t be normal.”</li>
-  </ul>
+        <!-- Tavern Image -->
+        <div class="tavern-image-container">
+            <img src="{{ url_for('static', filename='images/tavern_interior.jpg') }}" alt="Tavern Interior"
+                class="tavern-image">
+        </div>
 
-  <p><a href="/">Return to Gate</a></p>
+        <!-- List of fictional tavern whispers -->
+        <ul class="tavern-whispers">
+            <li>“They say the Black Flame is stirring again beneath Ebonreach.”</li>
+            <li>“A traveler claimed to have crossed Veilmarsh in a single heartbeat.”</li>
+            <li>“The Mirror of Veylun has cracked. Someone looked too long...”</li>
+        </ul>
+    </main>
+
+    <!-- === Footer === -->
+    <footer>
+        <p>&copy; 2025 ArcanaGate. All rights reserved.</p>
+    </footer>
+
 </body>
+
 </html>

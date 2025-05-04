@@ -95,8 +95,9 @@ def realms():
     return render_template('realms.html')
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/codex')
+def codex():
+    return render_template('codex.html')
 
 
 if __name__ == '__main__':

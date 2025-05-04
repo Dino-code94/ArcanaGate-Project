@@ -28,7 +28,7 @@
     <h2>Comments on <span style="color:#59f159">{{ topic }}</span></h2>
 
     <!-- Comment Form -->
-    <form method="POST">
+    <form method="POST" onsubmit="return showConfirmation()">
       <textarea name="content" placeholder="Whisper your thoughts..." required></textarea><br>
       <button type="submit" class="btn">Post Comment</button>
     </form>

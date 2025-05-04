@@ -9,3 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
+  function showConfirmation() {
+    alert("✅ Your whisper has been recorded.");
+    return true; // allow form to submit
+  }
+  

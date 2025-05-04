@@ -106,3 +106,39 @@ body {
     margin-top: 80px;
   }
   
+  /* === Realms Page Styling === */
+ .card-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+  }
+  
+  .card {
+    background-color: #131a13;
+    border: 1px solid #59f159;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 0 15px rgba(89, 241, 89, 0.2);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(89, 241, 89, 0.5);
+  }
+  
+  .card h3 {
+    color: #aef7ae;
+    margin-top: 15px;
+    font-size: 1.4em;
+  }
+  
+  .card p {
+    font-size: 0.95em;
+    color: #c1f0c1;
+  }
+  

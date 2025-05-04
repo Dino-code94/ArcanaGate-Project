@@ -1,28 +1,63 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Realms - ArcanaGate</title>
+  <meta charset="UTF-8">
+  <title>Realms of ArcanaGate</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-    <h1>The Realms of ArcanaGate</h1>
 
-    <img src="{{ url_for('static', filename='images/realms_map.jpg') }}" alt="Map of ArcanaGate"
-        style="width:100%; max-width:800px; border:1px solid #333; margin-bottom: 20px;">
+  <!-- Header with nav bar (same as other pages) -->
+  <header>
+    <h1 class="logo">ArcanaGate</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/realms">Realms</a>
+      <a href="/codex">Codex</a>
+      <a href="/tavern">Tavern</a>
+      {% if session.get('username') %}
+        <a href="/logout">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {% endif %}
+    </nav>
+  </header>
 
-    <ul>
-        <li><strong>Ebonreach:</strong> A shadowy swamp filled with cursed whispers and lost souls.</li>
-        <li><strong>Luminaris:</strong> A floating city suspended by ancient arcane crystals, glowing with blue light.
-        </li>
-        <li><strong>Thornwood:</strong> A twisted, sentient forest that traps intruders in illusions and thorns.</li>
-        <li><strong>Skyridge:</strong> Towering mountains once ruled by dragons; echoes of roars still shake the cliffs.
-        </li>
-        <li><strong>Veilmarsh:</strong> A fog-choked marsh where time behaves unpredictably.</li>
-        <li><strong>Obsidian Hollow:</strong> A crater of black stone — origin unknown — pulsing with dark energy.</li>
-    </ul>
+  <!-- Main content: Realms layout -->
+  <main>
+    <h2>Explore the Forgotten Realms</h2>
+    <p style="text-align: center;">Mysterious lands await beyond the veil...</p>
 
-    <p><a href="/">Return to Gate</a></p>
+    <div class="card-section">
+
+      <!-- Realm 1 -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/realm1.jpg') }}" alt="Ebonreach" style="width:100%; border-radius: 10px;">
+        <h3>Ebonreach</h3>
+        <p>A realm shrouded in eternal twilight, home to lost magic.</p>
+      </div>
+
+      <!-- Realm 2 -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/realm2.jpg') }}" alt="Thornwood" style="width:100%; border-radius: 10px;">
+        <h3>Thornwood</h3>
+        <p>An overgrown forest realm, crawling with fae secrets and danger.</p>
+      </div>
+
+      <!-- Realm 3 -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/realm3.jpg') }}" alt="Frostveil" style="width:100%; border-radius: 10px;">
+        <h3>Frostveil</h3>
+        <p>An icy land ruled by ancient spirits and forgotten ruins.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ArcanaGate. All rights reserved.</p>
+  </footer>
+
 </body>
-
 </html>

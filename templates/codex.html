@@ -1,25 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Codex - ArcanaGate</title>
+    <meta charset="UTF-8">
+    <title>Codex – ArcanaGate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <h1>The Codex of Arcane Lore</h1>
 
-    <img src="{{ url_for('static', filename='images/codex_scroll.jpg') }}" alt="Arcane Codex"
-        style="width:100%; max-width:800px; margin-bottom:20px;">
+    <!-- === Header Navigation === -->
+    <header>
+        <h1 class="logo">ArcanaGate</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/realms">Realms</a>
+            <a href="/codex">Codex</a>
+            <a href="/tavern">Tavern</a>
+            {% if session.get('username') %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            {% endif %}
+        </nav>
+    </header>
 
-    <ul>
-        <li><strong>Spell: Shadowbind</strong> — Immobilizes a target using threads of void magic.</li>
-        <li><strong>Artifact: Eye of Astral</strong> — Reveals glimpses of alternate timelines.</li>
-        <li><strong>Potion: Moonmist Elixir</strong> — Grants temporary invisibility under moonlight.</li>
-        <li><strong>Curse: Soulthorn</strong> — Seeds pain into the thoughts of betrayers.</li>
-        <li><strong>Enchantment: Aetherstep</strong> — Allows walking short distances through walls.</li>
-    </ul>
+    <!-- === Main Codex Section === -->
+    <main>
+        <h2 class="section-title">The Codex of Forgotten Lore</h2>
+        <p class="intro-text">
+            Within these scrolls lies ancient knowledge, magical rituals, and the secrets of the ArcanaGate. Handle with
+            reverence.
+        </p>
 
-    <p><a href="/">Return to Gate</a></p>
+        <!-- === Scroll Image 1 === -->
+        <div class="codex-image-container">
+            <img src="{{ url_for('static', filename='images/codex_scroll.jpg') }}" alt="Ancient Scroll"
+                class="codex-image">
+            <p class="caption">A weathered scroll containing forbidden enchantments.</p>
+        </div>
+
+        <!-- === Scroll Image 2 === -->
+        <div class="codex-image-container">
+            <img src="{{ url_for('static', filename='images/ancient_spellbook.jpg') }}" alt="Ancient Spellbook"
+                class="codex-image">
+            <p class="caption">Pages from the Codex Arcanum—inked in blood and moonlight.</p>
+        </div>
+
+        <!-- === Scroll Image 3 === -->
+        <div class="codex-image-container">
+            <img src="{{ url_for('static', filename='images/magic_library_scroll.jpg') }}" alt="Magic Library"
+                class="codex-image">
+            <p class="caption">Deep in the library of magic, scrolls whisper forgotten names.</p>
+        </div>
+    </main>
+
+    <!-- === Footer === -->
+    <footer>
+        <p>&copy; 2025 ArcanaGate. All rights reserved.</p>
+    </footer>
+
 </body>
 
 </html>

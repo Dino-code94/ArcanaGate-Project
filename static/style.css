@@ -142,3 +142,32 @@ body {
     color: #c1f0c1;
   }
   
+  /* === Codex Page Styling === */
+.codex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+  
+  .codex-entry {
+    background: #1b1b1b;
+    border: 1px solid #59f159;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(89, 241, 89, 0.2);
+  }
+  
+  .codex-entry h3 {
+    color: #aef7ae;
+    text-shadow: 0 0 4px #59f159;
+  }
+  
+  .codex-entry p {
+    color: #c1f0c1;
+    font-size: 0.95em;
+  }
+  

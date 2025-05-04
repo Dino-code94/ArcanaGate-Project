@@ -1,0 +1,68 @@
+/* Container for login/register forms */
+.auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #1a1f1a;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #59f15933;
+  }
+  
+  /* Heading style */
+  .auth-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #aef7ae;
+  }
+  
+  /* Label style */
+  .auth-container label {
+    display: block;
+    margin-top: 15px;
+    color: #c1f0c1;
+  }
+  
+  /* Input field styles */
+  .auth-container input[type="text"],
+  .auth-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #0c0f0a;
+    border: 1px solid #59f159;
+    color: #c1f0c1;
+    border-radius: 5px;
+  }
+  
+  /* Submit button */
+  .auth-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #59f159;
+    color: #0c0f0a;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for button */
+  .auth-container button:hover {
+    background-color: #7aff7a;
+  }
+  
+  /* Link under form */
+  .auth-container a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #aef7ae;
+    text-decoration: none;
+  }
+  
+  /* Hover effect for link */
+  .auth-container a:hover {
+    text-decoration: underline;
+  }
+  

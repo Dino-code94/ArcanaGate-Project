@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Register - ArcanaGate</title>
+  <meta charset="UTF-8" />
+  <title>Register - ArcanaGate</title>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Link to auth form styling -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
 </head>
-
 <body>
+
+  <!-- Registration Form Container -->
+  <div class="auth-container">
     <h1>Register</h1>
+
+    <!-- Registration form -->
     <form method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username" required><br><br>
+      <!-- Username input -->
+      <label for="username">Username:</label>
+      <input type="text" name="username" required>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+      <!-- Password input -->
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
 
-        <button type="submit">Register</button>
+      <!-- Submit button -->
+      <button type="submit">Register</button>
     </form>
-    <p><a href="/login">Already have an account? Login</a></p>
-</body>
 
+    <!-- Link to login page -->
+    <a href="/login">Already have an account? Login</a>
+  </div>
+
+</body>
 </html>

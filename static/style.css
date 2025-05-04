@@ -184,4 +184,62 @@ main {
     color: #888;
     margin-top: 80px;
   }
+
+  /* === Comment Page Styling === */
+.comment-section {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #131a13;
+    border: 1px solid #59f159;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(89, 241, 89, 0.2);
+    text-align: center;
+  }
+  
+  .comment-section h2 {
+    color: #aef7ae;
+    margin-bottom: 30px;
+    text-shadow: 0 0 6px #59f159;
+  }
+  
+  .comment-section form textarea {
+    width: 90%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #59f159;
+    border-radius: 8px;
+    background-color: #0c0f0a;
+    color: #c1f0c1;
+    resize: vertical;
+    font-family: Georgia, serif;
+    margin-bottom: 20px;
+  }
+  
+  .comment-section .btn {
+    margin-top: 10px;
+  }
+  
+  /* Comment List */
+  .comment-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+    text-align: left;
+    color: #d1ffd1;
+  }
+  
+  .comment-list li {
+    background-color: #1b1b1b;
+    border: 1px solid #2c7a2c;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 8px rgba(89, 241, 89, 0.1);
+  }
+  
+  .comment-list strong {
+    color: #7aff7a;
+  }
+  
   

@@ -3,10 +3,9 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'secretkey123'  # Change this before going public
+app.secret_key = 'secretkey123'  # Replace with a secure key in production
 
-
-# Connect to SQLite database
+# Connect to SQLite
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -15,11 +14,17 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    conn = get_db_connection()
+    comments = conn.execute(
+        'SELECT user, content, created_at FROM comments ORDER BY created_at DESC'
+    ).fetchall()
+    conn.close()
+    return render_template('index.html', comments=comments)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    print("📥 Register route hit")  # Debug print
     if request.method == 'POST':
         username = request.form['username']
         password = generate_password_hash(request.form['password'])
@@ -66,7 +71,33 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
-    
+
+
+@app.route('/comment', methods=['POST'])
+def comment():
+    if 'username' not in session:
+        return redirect('/login')
+
+    content = request.form['content']
+    user = session['username']
+
+    conn = get_db_connection()
+    conn.execute(
+        'INSERT INTO comments (user, content) VALUES (?, ?)',
+        (user, content)
+    )
+    conn.commit()
+    conn.close()
+    return redirect('/')
+
+@app.route('/realms')
+def realms():
+    return render_template('realms.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

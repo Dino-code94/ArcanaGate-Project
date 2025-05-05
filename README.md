@@ -7,3 +7,14 @@ Whether you're a lone sorcerer seeking knowledge or a traveler looking to leave 
 ArcanaGate invites you to step through the gate and shape its unfolding legend.
 
 ---
+
+## 📄 Features
+
+- ✨ Mystical Design with glowing buttons and fantasy fonts.
+- 🌐 Realms section: Explore detailed regions like *Ebonreach*, *Veilmarsh*, and more.
+- 📖 Codex: Ancient spellbook-style entries and knowledge.
+- 🍻 Tavern: Player whispers and rumors.
+- 💬 Commenting system with user login/logout.
+- ⚡ Subtle animations using JavaScript for card transitions.
+
+---

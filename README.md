@@ -119,6 +119,6 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 ![Image](https://github.com/user-attachments/assets/72176373-3ad0-4c35-ae16-1d206fa421bc)
 
 ### 🍻 Register  
-
+![Image](https://github.com/user-attachments/assets/f495dcf7-5246-47b1-bf4c-1fc5e6e572f6)
 
 ---

@@ -71,7 +71,7 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org/) to v
 
 | Report | Screenshot |
 | :---: | :---: |
-| realms.html | ![screenshot]() |
+| realms.html | ![Image](https://github.com/user-attachments/assets/a3dbdb60-aeaa-45f3-bb3b-34b5c8cbb571) |
 
 | Report | Screenshot |
 | :---: | :---: |

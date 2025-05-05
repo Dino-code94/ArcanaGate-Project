@@ -63,7 +63,7 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org/) to v
 
 | Report | Screenshot |
 | :---: | :---: |
-| index.html | ![screenshot]() |
+| index.html | ![Image](https://github.com/user-attachments/assets/c35daf6f-ccac-45a2-9766-cad6e3a6cfe2) |
 
 | Report | Screenshot |
 | :---: | :---: |

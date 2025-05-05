@@ -95,7 +95,7 @@ Bellow is the recommended [JSHint](https://jshint.com/) results
 
 | Report | Screenshot |
 | :---: | :---: |
-| script.js | ![screenshot]() |
+| script.js | ![Image](https://github.com/user-attachments/assets/4b29ac75-295a-4268-ab79-479745cc4777) |
 
 ### Python
 

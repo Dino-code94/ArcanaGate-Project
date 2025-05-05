@@ -87,7 +87,7 @@ I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-val
 
 | Report | Screenshot |
 | :---: | :---: |
-| auth.css | ![screenshot]() |
+| auth.css | ![Image](https://github.com/user-attachments/assets/4e7ec3e5-dcc5-4234-9cc9-df34ddafde3a) |
 
 ### JavaScript
 

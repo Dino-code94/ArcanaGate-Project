@@ -113,7 +113,7 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 ![Image](https://github.com/user-attachments/assets/05464cd5-1bbe-4c73-b5db-b70c814992f1)
 
 ### 🌐 Navigation Bar  
-
+![Image](https://github.com/user-attachments/assets/b17a0e89-9630-4f55-8045-283eb0be0449)
 
 ### 📖 Login  
 

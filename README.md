@@ -153,6 +153,8 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 
   - PythonAnywhere
 
+  - The live link can be found here:
+
 ## 🎨 Credits
 
   - Fantasy images from OpenGameArt.org

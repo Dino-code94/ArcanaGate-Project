@@ -161,6 +161,14 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 
   - Flask, SQLite, and Vanilla JS integration
 
+## ✉️ Contact
+
+  - Author: DinoKlaric
+  - Email: dinoklaric29@gmail.com
+  - GitHub: [github.com/yourusername](https://github.com/Dino-code94)
+
+
+
 ## 🔧 Setup Instructions
 
 1. **Clone the repository:**

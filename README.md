@@ -36,3 +36,19 @@ ArcanaGate invites you to step through the gate and shape its unfolding legend.
 - **Deployment-ready**: Compatible with Render or Heroku
 
 ---
+
+## 🌐 User Experience
+- Seamless navigation through mystical realms
+- Responsive design for desktop and mobile
+- Smooth fade-in animations for immersive storytelling
+- Form feedback and alerts for user interactions
+
+---
+
+## 🕵️‍♂️ User Stories
+- As a new adventurer, I want to register and start my journey.
+- As a wanderer, I want to leave comments on magical locations.
+- As a scholar, I want to read the codex for lore and insight.
+- As a returning user, I want to log in and see the latest whispers.
+
+---

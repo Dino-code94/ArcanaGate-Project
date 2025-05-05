@@ -18,3 +18,11 @@ ArcanaGate invites you to step through the gate and shape its unfolding legend.
 - ⚡ Subtle animations using JavaScript for card transitions.
 
 ---
+
+## 🖌️ Color Scheme
+- Background: `#0c0f0a` (Deep black-green)
+- Accent: `#59f159` (Glowing arcane green)
+- Text: `#aef7ae` / `#c1f0c1` (Soft fantasy green)
+- Highlights: Shadows, glow, and gradients for magical flair
+
+---

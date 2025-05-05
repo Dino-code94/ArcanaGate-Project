@@ -133,6 +133,34 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 
   - Duplicate user detection during registration
 
+## Covered:
+
+  - Registration & login
+
+  - Session management
+
+  - Comment system
+
+  - Route accessibility
+
+## 🚀 Deployment
+
+  - Can be deployed to:
+
+  - Render
+
+  - Heroku
+
+  - PythonAnywhere
+
+## 🎨 Credits
+
+  - Fantasy images from OpenGameArt.org
+
+  - Design inspired by classic RPG aesthetics
+
+  - Flask, SQLite, and Vanilla JS integration
+
 ## 🔧 Setup Instructions
 
 1. **Clone the repository:**

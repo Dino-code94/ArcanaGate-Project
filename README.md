@@ -83,7 +83,7 @@ I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-val
 
 | Report | Screenshot |
 | :---: | :---: |
-| style.css | ![screenshot]() |
+| style.css | ![Image](https://github.com/user-attachments/assets/67e03e3d-a26c-4a7e-9e54-85e5f1d9d826) |
 
 | Report | Screenshot |
 | :---: | :---: |

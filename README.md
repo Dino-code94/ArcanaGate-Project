@@ -122,3 +122,30 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 ![Image](https://github.com/user-attachments/assets/f495dcf7-5246-47b1-bf4c-1fc5e6e572f6)
 
 ---
+
+## 🔧 Setup Instructions
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/ArcanaGate-Project.git
+cd ArcanaGate-Project
+
+Create a virtual environment:
+
+bash
+python -m venv venv
+venv\Scripts\activate  # On Windows
+Install dependencies:
+
+bash
+pip install -r requirements.txt
+Initialize the database:
+
+bash
+python db_setup.py
+Run the app:
+
+bash
+python app.py
+Then open in browser:
+http://127.0.0.1:5000

@@ -123,6 +123,16 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 
 ---
 
+## 🤖 Credentials & Auth
+
+  - Secure password hashing via Werkzeug
+
+  - User session tracking via Flask session
+
+  - Route protection for commenting
+
+  - Duplicate user detection during registration
+
 ## 🔧 Setup Instructions
 
 1. **Clone the repository:**
@@ -130,7 +140,7 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 git clone https://github.com/yourusername/ArcanaGate-Project.git
 cd ArcanaGate-Project
 
-Create a virtual environment:
+2. **Create a virtual environment:**
 
 bash
 python -m venv venv
@@ -143,9 +153,9 @@ Initialize the database:
 
 bash
 python db_setup.py
-Run the app:
+Run the app
 
 bash
 python app.py
 Then open in browser:
-http://127.0.0.1:5000
+http://127.0.0.1:5000```

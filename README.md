@@ -105,3 +105,20 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 | :---: | :---: |
 | Python | ![Image](https://github.com/user-attachments/assets/966b8e9f-955c-4351-bf63-5d09cfd46b46) |
 
+---
+
+## 🎭 Screenshots
+
+### ✨ Home Page  
+
+
+### 🌐 Navigation Bar  
+
+
+### 📖 Login  
+
+
+### 🍻 Register  
+
+
+---

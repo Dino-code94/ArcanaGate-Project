@@ -52,3 +52,56 @@ ArcanaGate invites you to step through the gate and shape its unfolding legend.
 - As a returning user, I want to log in and see the latest whispers.
 
 ---
+
+## Testing
+
+## Code Validation
+
+### HTML
+
+I have used the recommended [HTML W3C Validator](https://validator.w3.org/) to validate HTML
+
+| Report | Screenshot |
+| :---: | :---: |
+| index.html | ![screenshot]() |
+
+| Report | Screenshot |
+| :---: | :---: |
+| codex.html | ![screenshot]() |
+
+| Report | Screenshot |
+| :---: | :---: |
+| realms.html | ![screenshot]() |
+
+| Report | Screenshot |
+| :---: | :---: |
+| tavern.html | ![screenshot]() |
+
+### CSS
+
+I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/) to validate all of my CSS files.
+
+| Report | Screenshot |
+| :---: | :---: |
+| style.css | ![screenshot]() |
+
+| Report | Screenshot |
+| :---: | :---: |
+| auth.css | ![screenshot]() |
+
+### JavaScript
+
+Bellow is the recommended [JSHint](https://jshint.com/) results
+
+| Report | Screenshot |
+| :---: | :---: |
+| script.js | ![screenshot]() |
+
+### Python
+
+Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://pythonium.net/linter) results
+
+| Report | Screenshot |
+| :---: | :---: |
+| Python | ![screenshot]() |
+

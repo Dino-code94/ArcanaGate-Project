@@ -2,18 +2,19 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
+# === App setup ===
 app = Flask(__name__)
 app.secret_key = 'secretkey123'  # Replace with a secure key in production
 
-# Connect to SQLite
 
+# === Database connection ===
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
 
 
+# === Home route ===
 @app.route('/')
 def home():
     conn = get_db_connection()
@@ -24,9 +25,9 @@ def home():
     return render_template('index.html', comments=comments)
 
 
+# === Register route ===
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    print("📥 Register route hit")  # Debug print
     if request.method == 'POST':
         username = request.form['username']
         password = generate_password_hash(request.form['password'])
@@ -47,6 +48,7 @@ def register():
     return render_template('register.html')
 
 
+# === Login route ===
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -69,12 +71,14 @@ def login():
     return render_template('login.html')
 
 
+# === Logout route ===
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
 
+# === Comment route ===
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
     topic = request.args.get('topic', 'Unknown Topic')
@@ -82,6 +86,7 @@ def comment():
     if request.method == 'POST':
         if 'username' not in session:
             return redirect('/login')
+
         content = request.form['content']
         user = session['username']
 
@@ -92,19 +97,20 @@ def comment():
         )
         conn.commit()
         conn.close()
+
         return redirect('/comment?topic=' + topic)
 
-    # GET request: show the form + previous comments
     conn = get_db_connection()
     comments = conn.execute(
         'SELECT user, content, created_at FROM comments WHERE topic = ? ORDER BY created_at DESC',
         (topic,)
     ).fetchall()
     conn.close()
+
     return render_template('comment.html', topic=topic, comments=comments)
 
 
-
+# === Static page routes ===
 @app.route('/realms')
 def realms():
     return render_template('realms.html')
@@ -120,5 +126,6 @@ def tavern():
     return render_template('tavern.html')
 
 
+# === App runner ===
 if __name__ == '__main__':
     app.run(debug=True)

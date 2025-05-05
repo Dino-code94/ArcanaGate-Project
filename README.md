@@ -75,7 +75,7 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org/) to v
 
 | Report | Screenshot |
 | :---: | :---: |
-| tavern.html | ![screenshot]() |
+| tavern.html | ![Image](https://github.com/user-attachments/assets/9fbe0656-d4f8-484c-b9e4-9e5fac11ac05) |
 
 ### CSS
 

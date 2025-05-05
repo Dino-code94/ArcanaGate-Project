@@ -26,3 +26,13 @@ ArcanaGate invites you to step through the gate and shape its unfolding legend.
 - Highlights: Shadows, glow, and gradients for magical flair
 
 ---
+
+## 📈 Tools & Technologies
+- **Frontend**: HTML5, CSS3, JavaScript (vanilla)
+- **Backend**: Python 3.11, Flask
+- **Database**: SQLite
+- **Styling**: Custom fantasy CSS theme
+- **Auth**: Werkzeug (password hashing)
+- **Deployment-ready**: Compatible with Render or Heroku
+
+---

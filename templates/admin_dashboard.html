@@ -2,10 +2,13 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Welcome, Admin {{ session.username }} 👑</h1>
-    <p>This is the protected admin panel.</p>
-    <a href="/">Back to site</a>
+    <main>
+        <h1>Welcome, Admin {{ session.username }} 👑</h1>
+        <p>This is the protected admin panel.</p>
+        <a href="/">← Back to Home</a>
+    </main>
 </body>
 </html>

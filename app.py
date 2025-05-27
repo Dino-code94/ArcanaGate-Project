@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -48,7 +48,6 @@ def register():
     return render_template('register.html')
 
 
-# === Login route ===
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -64,11 +63,16 @@ def login():
 
         if user and check_password_hash(user['password'], password):
             session['username'] = user['username']
+            session['is_admin'] = bool(user['is_admin'])  # 🟢 store admin flag
+
+            if user['is_admin']:
+                return redirect('/admin')  # optional: admin panel route
             return redirect('/')
         else:
             return 'Invalid credentials. Try again.'
 
     return render_template('login.html')
+
 
 
 # === Logout route ===
@@ -124,6 +128,14 @@ def codex():
 @app.route('/tavern')
 def tavern():
     return render_template('tavern.html')
+
+
+@app.route('/admin')
+def admin_dashboard():
+    if not session.get('is_admin'):
+        return "Access denied. Admins only.", 403
+
+    return render_template('admin_dashboard.html')
 
 
 # === App runner ===

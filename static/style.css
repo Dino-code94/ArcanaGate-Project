@@ -249,4 +249,70 @@ main {
     color: #7aff7a;
   }
   
+  /* ========== Media Queries ========== */
+
+/* Smartphones */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .hero h2 {
+    font-size: 2em;
+  }
+
+  .hero p {
+    font-size: 1em;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .codex-entry, .comment-section {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .tavern-whispers {
+    padding: 0 10px;
+  }
+
+  .comment-section form textarea {
+    width: 100%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .card-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+
+  .codex-entry, .comment-section {
+    width: 90%;
+  }
+
+  .tavern-whispers {
+    max-width: 90%;
+  }
+}
+
   

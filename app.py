@@ -42,8 +42,19 @@ def register():
         except sqlite3.IntegrityError:
             conn.close()
             return 'Username already exists.'
+
+        # 🔐 Auto-login after successful registration
+        user = conn.execute(
+            'SELECT * FROM users WHERE username = ?', (username,)
+        ).fetchone()
         conn.close()
-        return redirect('/login')
+
+        session['username'] = user['username']
+        session['is_admin'] = bool(user['is_admin'])
+
+        if user['is_admin']:
+            return redirect('/admin')
+        return redirect('/')
 
     return render_template('register.html')
 
@@ -136,6 +147,39 @@ def admin_dashboard():
         return "Access denied. Admins only.", 403
 
     return render_template('admin_dashboard.html')
+
+@app.route('/admin/users')
+def admin_users():
+    if not session.get('is_admin'):
+        return "Access denied", 403
+
+    conn = get_db_connection()
+    users = conn.execute('SELECT id, username, is_admin FROM users').fetchall()
+    conn.close()
+
+    return render_template('admin_users.html', users=users)
+
+
+@app.route('/admin/delete_user/<int:user_id>', methods=['POST'])
+def delete_user(user_id):
+    if not session.get('is_admin'):
+        return "Access denied", 403
+
+    conn = get_db_connection()
+    current_user = conn.execute(
+        'SELECT id FROM users WHERE username = ?',
+        (session['username'],)
+    ).fetchone()
+
+    if current_user and current_user['id'] == user_id:
+        conn.close()
+        return "You cannot delete yourself.", 400
+
+    conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect('/admin/users')
 
 
 # === App runner ===

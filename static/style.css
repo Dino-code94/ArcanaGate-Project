@@ -121,14 +121,16 @@ main {
   }
   
   .codex-entry {
-    background: #1b1b1b;
-    border: 1px solid #59f159;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 0 15px rgba(89, 241, 89, 0.2);
-  }
+  background: #1b1b1b;
+  border: 1px solid #59f159;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(89, 241, 89, 0.2);
+  margin: 0 auto 40px;
+  text-align: center;
+}
   
   .codex-entry h3 {
     color: #aef7ae;
@@ -141,15 +143,15 @@ main {
   }
   
   .codex-image {
-    display: block;
-    max-width: 80%;
-    height: auto;
-    margin: 20px auto;
-    border: 2px solid #59f159;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(89, 241, 89, 0.3);
-  }
-  
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border: 2px solid #59f159;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(89, 241, 89, 0.3);
+}
+
   /* === Tavern Page Styling === */
   .tavern-image {
     display: block;
@@ -314,5 +316,58 @@ main {
     max-width: 90%;
   }
 }
+
+/* === Admin Dashboard Styling === */
+.admin-dashboard {
+  max-width: 700px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: #131a13;
+  border: 1px solid #59f159;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(89, 241, 89, 0.3);
+  text-align: center;
+}
+
+.admin-dashboard h1 {
+  font-size: 2.8em;
+  color: #aef7ae;
+  text-shadow: 0 0 8px #59f159;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard p {
+  font-size: 1.2em;
+  color: #c1f0c1;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 10px 15px;
+  padding: 12px 25px;
+  background-color: #59f159;
+  color: #0c0f0a;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #59f159;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #7aff7a;
+  box-shadow: 0 0 16px #7aff7a;
+}
+
+/* === Realm Image Styling === */
+.realm-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(89, 241, 89, 0.3);
+  border: 2px solid #59f159;
+}
+
 
   

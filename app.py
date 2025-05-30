@@ -66,12 +66,20 @@ def login():
         password = request.form['password']
 
         conn = get_db_connection()
-        user = conn.execute(
-            'SELECT * FROM users WHERE username = ?',
-            (username,)
-        ).fetchone()
+
+        # 🚨 Print all users
+        rows = conn.execute("SELECT * FROM users").fetchall()
+        for row in rows:
+            print(dict(row))
+
+        user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
         conn.close()
 
+
+        print(f"🔍 User from DB: {user}")
+        print(f"🔑 Provided password: {password}")
+        print(f"✅ Password match: {check_password_hash(user['password'], password) if user else 'No user'}")
+         
         if user and check_password_hash(user['password'], password):
             session['username'] = user['username']
             session['is_admin'] = bool(user['is_admin'])  # 🟢 store admin flag

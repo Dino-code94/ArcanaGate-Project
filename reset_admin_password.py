@@ -1,11 +1,23 @@
 import sqlite3
 from werkzeug.security import generate_password_hash
 
-conn = sqlite3.connect('database.db')
-new_password = generate_password_hash('securepassword123')
+USERNAME = "dino"
+NEW_PASSWORD = "jesusofsuburbia"
 
-conn.execute("UPDATE users SET password = ? WHERE username = 'admin'", (new_password,))
-conn.commit()
-conn.close()
+with sqlite3.connect("database.db") as conn:
+    hashed = generate_password_hash(NEW_PASSWORD)
 
-print("🔐 Password for 'admin' has been reset.")
+    cur = conn.execute(
+        "UPDATE users SET password = ?, is_admin = 1 "
+        "WHERE username = ?",
+        (hashed, USERNAME),
+    )
+    if cur.rowcount == 0:
+        conn.execute(
+            "INSERT INTO users (username, password, is_admin) "
+            "VALUES (?, ?, 1)",
+            (USERNAME, hashed),
+        )
+    conn.commit()
+
+print(f"✅ Password reset for: {USERNAME}")

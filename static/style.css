@@ -104,11 +104,27 @@ main {
     margin-bottom: 15px;
 }
 
+/* Default: hidden before animation */
 .card {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+}
+
+/* When ready: fade in */
+.card.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Realm images in cards */
+.card img,
+.realm-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
   
   
   /* === Codex Page Styling === */

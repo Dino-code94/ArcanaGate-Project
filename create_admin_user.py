@@ -1,21 +1,27 @@
 import sqlite3
 from werkzeug.security import generate_password_hash
 
-conn = sqlite3.connect('database.db')
-c = conn.cursor()
+USERNAME = "dino"
+PLAINTEXT = "jesusofsuburbia"
 
-username = 'admin'
-password = generate_password_hash('supersecure123')  # change this if you want
-is_admin = 1  # This marks the user as an admin
+with sqlite3.connect("database.db") as conn:
+    # Ensure username is unique (safe to run repeatedly)
+    conn.execute(
+        "CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username "
+        "ON users(username)"
+    )
 
-try:
-    c.execute('''
-    INSERT INTO users (username, password, is_admin)
-    VALUES (?, ?, ?)
-    ''', (username, password, is_admin))
+    hashed = generate_password_hash(PLAINTEXT)
+
+    # Upsert admin user with this password
+    conn.execute(
+        "INSERT INTO users (username, password, is_admin) "
+        "VALUES (?, ?, 1) "
+        "ON CONFLICT(username) DO UPDATE SET "
+        "password = excluded.password, "
+        "is_admin = 1",
+        (USERNAME, hashed),
+    )
     conn.commit()
-    print("✅ Admin user created.")
-except sqlite3.IntegrityError:
-    print("⚠️ Username already exists.")
-finally:
-    conn.close()
+
+print(f"✅ Admin ensured/updated: {USERNAME}")

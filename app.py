@@ -1,195 +1,241 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import (
+    Flask, render_template, request, redirect, url_for, session, flash
+)
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 
-# === App setup ===
+
 app = Flask(__name__)
-app.secret_key = 'secretkey123'  # Replace with a secure key in production
+app.secret_key = "secretkey123"  # TODO: use a strong secret in production
 
+# enable template auto-reload
+app.jinja_env.auto_reload = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# === Database connection ===
+# ---------- DB helpers ----------
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row  # rows behave like dicts
     return conn
 
 
-# === Home route ===
-@app.route('/')
+# ---------- Auth helpers ----------
+def admin_required(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if not session.get("username"):
+            flash("Please log in.", "error")
+            return redirect(url_for("login"))
+        if not session.get("is_admin"):
+            flash("Admin access required.", "error")
+            return redirect(url_for("home"))
+        return f(*args, **kwargs)
+    return wrapper
+
+
+# ---------- Routes ----------
+@app.route("/")
 def home():
+    # figure out admin status from the DB each time
+    username = session.get("username")
+    is_admin = False
+
+    # one connection to fetch both: admin flag and comments
     conn = get_db_connection()
+
+    if username:
+        row = conn.execute(
+            "SELECT is_admin FROM users WHERE username = ?",
+            (username,),
+        ).fetchone()
+        if row:
+            is_admin = bool(row["is_admin"])
+            # keep session in sync in case it was missing
+            session["is_admin"] = is_admin
+
     comments = conn.execute(
-        'SELECT user, content, created_at FROM comments ORDER BY created_at DESC'
+        "SELECT user, content, created_at "
+        "FROM comments "
+        "ORDER BY created_at DESC"
     ).fetchall()
+
     conn.close()
-    return render_template('index.html', comments=comments)
 
+    return render_template(
+        "index.html",
+        comments=comments,
+        is_admin=is_admin,
+    )
 
-# === Register route ===
-@app.route('/register', methods=['GET', 'POST'])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = generate_password_hash(request.form['password'])
+    if request.method == "POST":
+        username = request.form["username"].strip().lower()
+        pw_raw = request.form["password"]
+
+        if not username or not pw_raw:
+            flash("Username and password are required.", "error")
+            return render_template("register.html")
+
+        pw_hash = generate_password_hash(pw_raw)
 
         conn = get_db_connection()
         try:
+            # is_admin should default to 0 in the schema
             conn.execute(
-                'INSERT INTO users (username, password) VALUES (?, ?)',
-                (username, password)
+                "INSERT INTO users (username, password) VALUES (?, ?)",
+                (username, pw_hash),
             )
             conn.commit()
         except sqlite3.IntegrityError:
             conn.close()
-            return 'Username already exists.'
+            flash("Username already exists.", "error")
+            return render_template("register.html")
 
-        # 🔐 Auto-login after successful registration
         user = conn.execute(
-            'SELECT * FROM users WHERE username = ?', (username,)
+            "SELECT username, is_admin "
+            "FROM users "
+            "WHERE username = ?",
+            (username,),
         ).fetchone()
         conn.close()
 
-        session['username'] = user['username']
-        session['is_admin'] = bool(user['is_admin'])
+        session["username"] = user["username"]
+        session["is_admin"] = bool(user["is_admin"])
 
-        if user['is_admin']:
-            return redirect('/admin')
-        return redirect('/')
+        if session["is_admin"]:
+            return redirect(url_for("admin_dashboard"))
+        return redirect(url_for("home"))
 
-    return render_template('register.html')
+    return render_template("register.html")
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    if request.method == "POST":
+        username = request.form["username"].strip().lower()
+        pw_raw = request.form["password"]
 
         conn = get_db_connection()
-
-        # 🚨 Print all users
-        rows = conn.execute("SELECT * FROM users").fetchall()
-        for row in rows:
-            print(dict(row))
-
-        user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        user = conn.execute(
+            "SELECT id, username, password, is_admin "
+            "FROM users "
+            "WHERE username = ?",
+            (username,),
+        ).fetchone()
         conn.close()
 
+        if not user or not check_password_hash(user["password"], pw_raw):
+            flash("Invalid username or password.", "error")
+            return redirect(url_for("login"))
 
-        print(f"🔍 User from DB: {user}")
-        print(f"🔑 Provided password: {password}")
-        print(f"✅ Password match: {check_password_hash(user['password'], password) if user else 'No user'}")
-         
-        if user and check_password_hash(user['password'], password):
-            session['username'] = user['username']
-            session['is_admin'] = bool(user['is_admin'])  # 🟢 store admin flag
+        session["username"] = user["username"]
+        session["is_admin"] = bool(user["is_admin"])
 
-            if user['is_admin']:
-                return redirect('/admin')  # optional: admin panel route
-            return redirect('/')
-        else:
-            return 'Invalid credentials. Try again.'
+        if session["is_admin"]:
+            return redirect(url_for("admin_dashboard"))
+        return redirect(url_for("home"))
 
-    return render_template('login.html')
+    return render_template("login.html")
 
 
-
-# === Logout route ===
-@app.route('/logout')
+@app.route("/logout")
 def logout():
     session.clear()
-    return redirect('/')
+    flash("Logged out.", "info")
+    return redirect(url_for("home"))
 
 
-# === Comment route ===
-@app.route('/comment', methods=['GET', 'POST'])
+@app.route("/comment", methods=["GET", "POST"])
 def comment():
-    topic = request.args.get('topic', 'Unknown Topic')
+    topic = request.args.get("topic", "Unknown Topic")
 
-    if request.method == 'POST':
-        if 'username' not in session:
-            return redirect('/login')
+    if request.method == "POST":
+        if "username" not in session:
+            return redirect(url_for("login"))
 
-        content = request.form['content']
-        user = session['username']
+        content = request.form["content"].strip()
+        if not content:
+            flash("Comment cannot be empty.", "error")
+            return redirect(url_for("comment", topic=topic))
 
+        user = session["username"]
         conn = get_db_connection()
         conn.execute(
-            'INSERT INTO comments (user, content, topic) VALUES (?, ?, ?)',
-            (user, content, topic)
+            "INSERT INTO comments (user, content, topic) VALUES (?, ?, ?)",
+            (user, content, topic),
         )
         conn.commit()
         conn.close()
 
-        return redirect('/comment?topic=' + topic)
+        return redirect(url_for("comment", topic=topic))
 
     conn = get_db_connection()
     comments = conn.execute(
-        'SELECT user, content, created_at FROM comments WHERE topic = ? ORDER BY created_at DESC',
-        (topic,)
+        "SELECT user, content, created_at "
+        "FROM comments "
+        "WHERE topic = ? "
+        "ORDER BY created_at DESC",
+        (topic,),
     ).fetchall()
     conn.close()
 
-    return render_template('comment.html', topic=topic, comments=comments)
+    return render_template("comment.html", topic=topic, comments=comments)
 
 
-# === Static page routes ===
-@app.route('/realms')
+@app.route("/realms")
 def realms():
-    return render_template('realms.html')
+    return render_template("realms.html")
 
 
-@app.route('/codex')
+@app.route("/codex")
 def codex():
-    return render_template('codex.html')
+    return render_template("codex.html")
 
 
-@app.route('/tavern')
+@app.route("/tavern")
 def tavern():
-    return render_template('tavern.html')
+    return render_template("tavern.html")
 
 
-@app.route('/admin')
+# ---------- Admin ----------
+@app.route("/admin")
+@admin_required
 def admin_dashboard():
-    if not session.get('is_admin'):
-        return "Access denied. Admins only.", 403
+    return render_template("admin_dashboard.html")
 
-    return render_template('admin_dashboard.html')
 
-@app.route('/admin/users')
+@app.route("/admin/users")
+@admin_required
 def admin_users():
-    if not session.get('is_admin'):
-        return "Access denied", 403
-
     conn = get_db_connection()
-    users = conn.execute('SELECT id, username, is_admin FROM users').fetchall()
+    users = conn.execute(
+        "SELECT id, username, is_admin FROM users"
+    ).fetchall()
     conn.close()
+    return render_template("admin_users.html", users=users)
 
-    return render_template('admin_users.html', users=users)
 
-
-@app.route('/admin/delete_user/<int:user_id>', methods=['POST'])
-def delete_user(user_id):
-    if not session.get('is_admin'):
-        return "Access denied", 403
-
+@app.route("/admin/delete_user/<int:user_id>", methods=["POST"])
+@admin_required
+def delete_user(user_id: int):
     conn = get_db_connection()
-    current_user = conn.execute(
-        'SELECT id FROM users WHERE username = ?',
-        (session['username'],)
+
+    current = conn.execute(
+        "SELECT id FROM users WHERE username = ?",
+        (session["username"],),
     ).fetchone()
 
-    if current_user and current_user['id'] == user_id:
+    if current and current["id"] == user_id:
         conn.close()
         return "You cannot delete yourself.", 400
 
-    conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+    conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
     conn.commit()
     conn.close()
 
-    return redirect('/admin/users')
+    return redirect(url_for("admin_users"))
 
-
-# === App runner ===
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

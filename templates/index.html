@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
     <title>ArcanaGate</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
 <body>
@@ -12,51 +13,56 @@
     <header>
         <h1 class="logo">ArcanaGate</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/realms">Realms</a>
-            <a href="/codex">Codex</a>
-            <a href="/tavern">Tavern</a>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('realms') }}">Realms</a>
+            <a href="{{ url_for('codex') }}">Codex</a>
+            <a href="{{ url_for('tavern') }}">Tavern</a>
             {% if session.get('username') %}
-            <a href="/logout">Logout</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
             {% else %}
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
             {% endif %}
         </nav>
     </header>
 
-    <!-- === Hero Section === -->
+    <!-- === Main === -->
     <main>
+
+        <!-- Home-only admin shortcut -->
+        {% if is_admin %}
+        <div class="admin-cta" style="text-align:center;margin:1rem 0;">
+            <a class="btn" href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+        </div>
+        {% endif %}
+
+
+        <!-- Hero Section -->
         <div class="hero">
             <h2>Enter the ArcanaGate</h2>
             <p>A gateway to forgotten realms, forbidden knowledge, and whispered secrets.</p>
-            <a href="/register" class="btn">Begin Your Journey</a>
+            <a href="{{ url_for('register') }}" class="btn">Begin Your Journey</a>
         </div>
 
-        <!-- === Commentable Game Areas === -->
+        <!-- Commentable Game Areas -->
         <div class="card-section">
-
-            <!-- Ancient Ruins -->
             <div class="card">
                 <h3>Ancient Ruins</h3>
                 <p>A fascinating game.</p>
                 <a href="/comment?topic=Ancient Ruins" class="btn">Comment</a>
             </div>
 
-            <!-- Shadows Descent -->
             <div class="card">
                 <h3>Shadows Descent</h3>
                 <p>A primating a ratage.</p>
                 <a href="/comment?topic=Shadows Descent" class="btn">Comment</a>
             </div>
 
-            <!-- Mystic Quest -->
             <div class="card">
                 <h3>Mystic Quest</h3>
                 <p>A mexinisiic explore.</p>
                 <a href="/comment?topic=Mystic Quest" class="btn">Comment</a>
             </div>
-
         </div>
     </main>
 
@@ -65,10 +71,7 @@
         <p>&copy; 2025 ArcanaGate. All rights reserved.</p>
     </footer>
 
-    <!-- === JavaScript === -->
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 </body>
 
 </html>

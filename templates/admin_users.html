@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Admin - Users</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
+
+    <!-- Admin quick nav -->
+    <header style="text-align:center;margin:1rem 0;">
+        <a class="btn" href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+        <a class="btn" href="{{ url_for('logout') }}">Logout</a>
+    </header>
+
     <main>
         <h1>All Users</h1>
 
@@ -22,8 +31,8 @@
                 <td>{{ user.username }}</td>
                 <td>{{ "Yes" if user.is_admin else "No" }}</td>
                 <td>
-                    {% if user.username != session.username %}
-                    <form method="POST" action="/admin/delete_user/{{ user.id }}" style="display:inline;">
+                    {% if user.username != session.get('username') %}
+                    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" style="display:inline;">
                         <button type="submit">🗑️ Delete</button>
                     </form>
                     {% else %}
@@ -35,7 +44,9 @@
         </table>
 
         <br><br>
-        <a href="/admin" class="btn">← Back to Admin Dashboard</a>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn">← Back to Admin Dashboard</a>
     </main>
+
 </body>
+
 </html>

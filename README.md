@@ -173,27 +173,30 @@ Bellow is the python syntax checker [Pithonium]([https://jshint.com/](https://py
 
 ## 🔧 Setup Instructions
 
-1. **Clone the repository:**
-```bash
-git clone https://github.com/yourusername/ArcanaGate-Project.git
-cd ArcanaGate-Project
+Live app: https://arcana-gate-a19f5f7c992e.herokuapp.com/
 
-2. **Create a virtual environment:**
+Admin login for assessment
+- Username: dino
+- Password: jesusofsuburbia
+(Backup admin)
+- Username: admin
+- Password: securepassword123
 
-bash
-python -m venv venv
-venv\Scripts\activate  # On Windows
-Install dependencies:
+Features to test
+- Register / Login / Logout
+- Admin dashboard (/admin) and user management (/admin/users)
+- Comment posting at /comment?topic=Ancient%20Ruins
+- Realms & Codex pages with static images
 
-bash
-pip install -r requirements.txt
-Initialize the database:
+If database is empty on a fresh dyno (Heroku)
+- Heroku Dashboard → More → Run console
+  python add_admin_column.py
+  python ensure_users.py
+  python check_admin_user.py
 
-bash
-python db_setup.py
-Run the app
-
-bash
-python app.py
-Then open in browser:
-http://127.0.0.1:5000```
+Local run
+- Python 3.11+
+- pip install -r requirements.txt
+- python add_admin_column.py
+- python ensure_users.py
+- flask --app app --debug run
